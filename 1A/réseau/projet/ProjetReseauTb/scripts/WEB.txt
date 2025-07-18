@@ -1,8 +1,0 @@
-#!/bin/bash
-ip link set dev eth0 up
-
-ip addr add 192.168.63.2/25 dev eth0
-
-ip route add default via 192.168.63.1
-
-service apache2 start
