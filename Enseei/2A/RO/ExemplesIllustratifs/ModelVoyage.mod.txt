@@ -1,0 +1,49 @@
+su#  GLPK model file created by SUN for RO teaching
+
+
+###############################  Model ###############################
+
+
+###############################  Sets  ###############################
+
+
+set CLIENTS; 	
+set CLIENTSSALPHA;
+################### Variables ###################
+
+var trajet{i in CLIENTS, j in CLIENTS}, binary; 
+var suiteDesClients{i in CLIENTSSALPHA}, integer;
+param BigM;
+###################  Constants: Data to load   #########################
+
+param distances{i in CLIENTS, j in CLIENTS};
+
+################### Constraints ###################
+
+s.t. RespectUnParLigne{i in CLIENTS}:
+    sum{j in CLIENTS} trajet[i,j]=1;
+s.t. RespectUnParColone{i in CLIENTS}:
+    sum{j in CLIENTS} trajet[j,i]=1;
+s.t. RespectDiagNulle {i in CLIENTS} :
+    trajet[i, i] = 0;
+
+s.t. RespectPasDeBoucle {i in CLIENTSSALPHA, j in CLIENTSSALPHA} :
+    (BigM-1)+suiteDesClients[i]>=suiteDesClients[j]+BigM*trajet[i,j];
+
+s.t. RespectPasdeboucle3 {i in CLIENTSSALPHA}:
+    suiteDesClients[i]>=1 ;
+
+s.t. RespectPasdeboucle2 {i in CLIENTSSALPHA}:
+    suiteDesClients[i]<=5 ;
+
+dtra
+
+
+
+###### Objective ######
+
+minimize DistanceTotale: 
+		sum{i in CLIENTS} sum{j in CLIENTS} distances[i,j]*trajet[i,j];
+
+
+end;

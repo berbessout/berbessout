@@ -1,0 +1,38 @@
+\* Problem: PbAffectation *\
+
+Maximize
+ BeneficeTotal: + 4 choix(1,1) + 7 choix(2,1) + 9 choix(3,1)
+ + 9 choix(1,2) + 8 choix(2,2) + 3 choix(3,2) + 2 choix(1,3)
+ + choix(2,3) + 2 choix(3,3)
+
+Subject To
+ Respectcolonnes(1): + choix(1,1) + choix(2,1) + choix(3,1) = 1
+ Respectcolonnes(2): + choix(1,2) + choix(2,2) + choix(3,2) = 1
+ Respectcolonnes(3): + choix(1,3) + choix(2,3) + choix(3,3) = 1
+ Respectligne(1): + choix(1,1) + choix(1,2) + choix(1,3) = 1
+ Respectligne(2): + choix(2,1) + choix(2,2) + choix(2,3) = 1
+ Respectligne(3): + choix(3,1) + choix(3,2) + choix(3,3) = 1
+
+Bounds
+ 0 <= choix(1,1) <= 1
+ 0 <= choix(2,1) <= 1
+ 0 <= choix(3,1) <= 1
+ 0 <= choix(1,2) <= 1
+ 0 <= choix(2,2) <= 1
+ 0 <= choix(3,2) <= 1
+ 0 <= choix(1,3) <= 1
+ 0 <= choix(2,3) <= 1
+ 0 <= choix(3,3) <= 1
+
+Generals
+ choix(1,1)
+ choix(2,1)
+ choix(3,1)
+ choix(1,2)
+ choix(2,2)
+ choix(3,2)
+ choix(1,3)
+ choix(2,3)
+ choix(3,3)
+
+End

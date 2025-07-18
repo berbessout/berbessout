@@ -1,0 +1,8 @@
+model S {
+	flow f from Ba.ra to HS.pa, HS.pb;
+	block Ba(pa : in float);
+		system HS(pa : in float ) {
+	       block Bb(ra : out float, pa : in float);
+			flow fb from pb to rb;
+	}
+}

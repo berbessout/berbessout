@@ -1,0 +1,62 @@
+\* Problem: PbCommerce2 *\
+
+Minimize
+ cout: + 11 c(f1,c1,m1) + 3 c(f1,c1,m2) + 8 c(f1,c1,m3) + 3 c(f1,c2,m1)
+ + 22 c(f1,c2,m2) + 13 c(f1,c2,m3) + 11 c(f2,c1,m1) + 4 c(f2,c1,m2)
+ + 7 c(f2,c1,m3) + 3 c(f2,c2,m1) + 23 c(f2,c2,m2) + 12 c(f2,c2,m3)
+ + 110 choisie(c1,m1) + 90 choisie(c1,m2) + 100 choisie(c1,m3)
+ + 110 choisie(c2,m1) + 90 choisie(c2,m2) + 100 choisie(c2,m3)
+
+Subject To
+ Respectcolonnes(f1,c1): + c(f1,c1,m1) + c(f1,c1,m2) + c(f1,c1,m3) = 2
+ Respectcolonnes(f1,c2): + c(f1,c2,m1) + c(f1,c2,m2) + c(f1,c2,m3) = 1
+ Respectcolonnes(f2,c1): + c(f2,c1,m1) + c(f2,c1,m2) + c(f2,c1,m3) = -0
+ Respectcolonnes(f2,c2): + c(f2,c2,m1) + c(f2,c2,m2) + c(f2,c2,m3) = 3
+ RespectStocks(f1,m1): + c(f1,c1,m1) + c(f1,c2,m1) <= 2.5
+ RespectStocks(f1,m2): + c(f1,c1,m2) + c(f1,c2,m2) <= 1
+ RespectStocks(f1,m3): + c(f1,c1,m3) + c(f1,c2,m3) <= 2
+ RespectStocks(f2,m1): + c(f2,c1,m1) + c(f2,c2,m1) <= 1
+ RespectStocks(f2,m2): + c(f2,c1,m2) + c(f2,c2,m2) <= 2
+ RespectStocks(f2,m3): + c(f2,c1,m3) + c(f2,c2,m3) <= 1
+ RespectSynchrosup(c1,m1): - c(f1,c1,m1) - c(f2,c1,m1)
+ + 1000 choisie(c1,m1) >= -0
+ RespectSynchrosup(c1,m2): - c(f1,c1,m2) - c(f2,c1,m2)
+ + 1000 choisie(c1,m2) >= -0
+ RespectSynchrosup(c1,m3): - c(f1,c1,m3) - c(f2,c1,m3)
+ + 1000 choisie(c1,m3) >= -0
+ RespectSynchrosup(c2,m1): - c(f1,c2,m1) - c(f2,c2,m1)
+ + 1000 choisie(c2,m1) >= -0
+ RespectSynchrosup(c2,m2): - c(f1,c2,m2) - c(f2,c2,m2)
+ + 1000 choisie(c2,m2) >= -0
+ RespectSynchrosup(c2,m3): - c(f1,c2,m3) - c(f2,c2,m3)
+ + 1000 choisie(c2,m3) >= -0
+ RespectSynchroinf(c1,m1): - c(f1,c1,m1) - c(f2,c1,m1) + choisie(c1,m1)
+ <= -0
+ RespectSynchroinf(c1,m2): - c(f1,c1,m2) - c(f2,c1,m2) + choisie(c1,m2)
+ <= -0
+ RespectSynchroinf(c1,m3): - c(f1,c1,m3) - c(f2,c1,m3) + choisie(c1,m3)
+ <= -0
+ RespectSynchroinf(c2,m1): - c(f1,c2,m1) - c(f2,c2,m1) + choisie(c2,m1)
+ <= -0
+ RespectSynchroinf(c2,m2): - c(f1,c2,m2) - c(f2,c2,m2) + choisie(c2,m2)
+ <= -0
+ RespectSynchroinf(c2,m3): - c(f1,c2,m3) - c(f2,c2,m3) + choisie(c2,m3)
+ <= -0
+
+Bounds
+ 0 <= choisie(c1,m1) <= 1
+ 0 <= choisie(c1,m2) <= 1
+ 0 <= choisie(c1,m3) <= 1
+ 0 <= choisie(c2,m1) <= 1
+ 0 <= choisie(c2,m2) <= 1
+ 0 <= choisie(c2,m3) <= 1
+
+Generals
+ choisie(c1,m1)
+ choisie(c1,m2)
+ choisie(c1,m3)
+ choisie(c2,m1)
+ choisie(c2,m2)
+ choisie(c2,m3)
+
+End

@@ -1,0 +1,17 @@
+#!/bin/bash
+ip link set dev eth0 up 
+ip addr add 120.7.250.2/27 dev eth0
+ip link set dev eth1 up 
+ip addr add 120.7.250.34/27 dev eth1
+ip link set dev eth2 up 
+ip addr add 120.7.250.65/26 dev eth2
+service quagga start
+
+#commande pour aller au reséau locaux
+#ip route add 192.168.85.64/26 via 120.7.250.1
+#ip route add 192.168.85.0/26 via 120.7.250.33
+
+#cpùùande pour aller vers le FAIserveur
+#ip route add 120.7.250.128/26 via 120.7.250.66
+#ip route add 120.7.250.192/26 via 120.7.250.66
+

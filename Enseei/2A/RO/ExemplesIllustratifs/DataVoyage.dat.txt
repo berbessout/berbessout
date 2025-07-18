@@ -1,0 +1,36 @@
+# Autres donn�es possibles pour 
+# le probl�me de fabrication 
+# de ciment
+
+data;
+
+
+set CLIENTS := 
+alpha
+c1
+c2
+c3
+c4
+c5;
+
+param BigM := 5;
+
+set CLIENTSSALPHA := 
+c1
+c2
+c3
+c4
+c5;
+
+
+
+param distances: alpha c1 c2 c3 c4 c5:=
+alpha 0 1 1 10 12 12
+c1 1 0 1 8 10 11
+c2 1 1 0 8 11 10
+c3 10 8 8 0 1 1 
+c4 12 10 11 1 0 1
+c5 12 11 10 1 1 0;
+
+
+end;

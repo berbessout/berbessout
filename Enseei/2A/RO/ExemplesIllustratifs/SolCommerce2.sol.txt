@@ -1,0 +1,92 @@
+Problem:    
+Rows:       22
+Columns:    18 (6 integer, 6 binary)
+Non-zeros:  60
+Status:     INTEGER OPTIMAL
+Objective:  cout = 368 (MINimum)
+
+   No.   Row name        Activity     Lower bound   Upper bound
+------ ------------    ------------- ------------- -------------
+     1 Respectcolonnes(f1,c1)
+                                   2             2             = 
+     2 Respectcolonnes(f1,c2)
+                                   1             1             = 
+     3 Respectcolonnes(f2,c1)
+                                   0            -0             = 
+     4 Respectcolonnes(f2,c2)
+                                   3             3             = 
+     5 RespectStocks(f1,m1)
+                                   1                         2.5 
+     6 RespectStocks(f1,m2)
+                                   0                           1 
+     7 RespectStocks(f1,m3)
+                                   2                           2 
+     8 RespectStocks(f2,m1)
+                                   1                           1 
+     9 RespectStocks(f2,m2)
+                                   2                           2 
+    10 RespectStocks(f2,m3)
+                                   0                           1 
+    11 RespectSynchrosup(c1,m1)
+                                   0            -0               
+    12 RespectSynchrosup(c1,m2)
+                                   0            -0               
+    13 RespectSynchrosup(c1,m3)
+                                 998            -0               
+    14 RespectSynchrosup(c2,m1)
+                                 998            -0               
+    15 RespectSynchrosup(c2,m2)
+                                 998            -0               
+    16 RespectSynchrosup(c2,m3)
+                                   0            -0               
+    17 RespectSynchroinf(c1,m1)
+                                   0                          -0 
+    18 RespectSynchroinf(c1,m2)
+                                   0                          -0 
+    19 RespectSynchroinf(c1,m3)
+                                  -1                          -0 
+    20 RespectSynchroinf(c2,m1)
+                                  -1                          -0 
+    21 RespectSynchroinf(c2,m2)
+                                  -1                          -0 
+    22 RespectSynchroinf(c2,m3)
+                                   0                          -0 
+
+   No. Column name       Activity     Lower bound   Upper bound
+------ ------------    ------------- ------------- -------------
+     1 c(f1,c1,m1)                 0             0               
+     2 c(f1,c1,m2)                 0             0               
+     3 c(f1,c1,m3)                 2             0               
+     4 c(f1,c2,m1)                 1             0               
+     5 c(f1,c2,m2)                 0             0               
+     6 c(f1,c2,m3)                 0             0               
+     7 c(f2,c1,m1)                 0             0               
+     8 c(f2,c1,m2)                 0             0               
+     9 c(f2,c1,m3)                 0             0               
+    10 c(f2,c2,m1)                 1             0               
+    11 c(f2,c2,m2)                 2             0               
+    12 c(f2,c2,m3)                 0             0               
+    13 choisie(c1,m1)
+                    *              0             0             1 
+    14 choisie(c1,m2)
+                    *              0             0             1 
+    15 choisie(c1,m3)
+                    *              1             0             1 
+    16 choisie(c2,m1)
+                    *              1             0             1 
+    17 choisie(c2,m2)
+                    *              1             0             1 
+    18 choisie(c2,m3)
+                    *              0             0             1 
+
+Integer feasibility conditions:
+
+KKT.PE: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+KKT.PB: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+End of output

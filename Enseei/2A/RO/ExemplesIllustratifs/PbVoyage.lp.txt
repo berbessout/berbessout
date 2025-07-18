@@ -1,0 +1,189 @@
+\* Problem: ModelVoyage *\
+
+Minimize
+ DistanceTotale: + trajet(alpha,c1) + trajet(alpha,c2)
+ + 10 trajet(alpha,c3) + 12 trajet(alpha,c4) + 12 trajet(alpha,c5)
+ + trajet(c1,alpha) + trajet(c1,c2) + 8 trajet(c1,c3) + 10 trajet(c1,c4)
+ + 11 trajet(c1,c5) + trajet(c2,alpha) + trajet(c2,c1) + 8 trajet(c2,c3)
+ + 11 trajet(c2,c4) + 10 trajet(c2,c5) + 10 trajet(c3,alpha)
+ + 8 trajet(c3,c1) + 8 trajet(c3,c2) + trajet(c3,c4) + trajet(c3,c5)
+ + 12 trajet(c4,alpha) + 10 trajet(c4,c1) + 11 trajet(c4,c2)
+ + trajet(c4,c3) + trajet(c4,c5) + 12 trajet(c5,alpha)
+ + 11 trajet(c5,c1) + 10 trajet(c5,c2) + trajet(c5,c3) + trajet(c5,c4)
+
+Subject To
+ RespectUnParLigne(alpha): + trajet(alpha,alpha) + trajet(alpha,c1)
+ + trajet(alpha,c2) + trajet(alpha,c3) + trajet(alpha,c4)
+ + trajet(alpha,c5) = 1
+ RespectUnParLigne(c1): + trajet(c1,alpha) + trajet(c1,c1)
+ + trajet(c1,c2) + trajet(c1,c3) + trajet(c1,c4) + trajet(c1,c5) = 1
+ RespectUnParLigne(c2): + trajet(c2,alpha) + trajet(c2,c1)
+ + trajet(c2,c2) + trajet(c2,c3) + trajet(c2,c4) + trajet(c2,c5) = 1
+ RespectUnParLigne(c3): + trajet(c3,alpha) + trajet(c3,c1)
+ + trajet(c3,c2) + trajet(c3,c3) + trajet(c3,c4) + trajet(c3,c5) = 1
+ RespectUnParLigne(c4): + trajet(c4,alpha) + trajet(c4,c1)
+ + trajet(c4,c2) + trajet(c4,c3) + trajet(c4,c4) + trajet(c4,c5) = 1
+ RespectUnParLigne(c5): + trajet(c5,alpha) + trajet(c5,c1)
+ + trajet(c5,c2) + trajet(c5,c3) + trajet(c5,c4) + trajet(c5,c5) = 1
+ RespectUnParColone(alpha): + trajet(alpha,alpha) + trajet(c1,alpha)
+ + trajet(c2,alpha) + trajet(c3,alpha) + trajet(c4,alpha)
+ + trajet(c5,alpha) = 1
+ RespectUnParColone(c1): + trajet(alpha,c1) + trajet(c1,c1)
+ + trajet(c2,c1) + trajet(c3,c1) + trajet(c4,c1) + trajet(c5,c1) = 1
+ RespectUnParColone(c2): + trajet(alpha,c2) + trajet(c1,c2)
+ + trajet(c2,c2) + trajet(c3,c2) + trajet(c4,c2) + trajet(c5,c2) = 1
+ RespectUnParColone(c3): + trajet(alpha,c3) + trajet(c1,c3)
+ + trajet(c2,c3) + trajet(c3,c3) + trajet(c4,c3) + trajet(c5,c3) = 1
+ RespectUnParColone(c4): + trajet(alpha,c4) + trajet(c1,c4)
+ + trajet(c2,c4) + trajet(c3,c4) + trajet(c4,c4) + trajet(c5,c4) = 1
+ RespectUnParColone(c5): + trajet(alpha,c5) + trajet(c1,c5)
+ + trajet(c2,c5) + trajet(c3,c5) + trajet(c4,c5) + trajet(c5,c5) = 1
+ RespectDiagNulle(alpha): + trajet(alpha,alpha) = -0
+ RespectDiagNulle(c1): + trajet(c1,c1) = -0
+ RespectDiagNulle(c2): + trajet(c2,c2) = -0
+ RespectDiagNulle(c3): + trajet(c3,c3) = -0
+ RespectDiagNulle(c4): + trajet(c4,c4) = -0
+ RespectDiagNulle(c5): + trajet(c5,c5) = -0
+ RespectPasDeBoucle(c1,c1): - 5 trajet(c1,c1) >= -4
+ RespectPasDeBoucle(c1,c2): - 5 trajet(c1,c2) + suiteDesClients(c1)
+ - suiteDesClients(c2) >= -4
+ RespectPasDeBoucle(c1,c3): - 5 trajet(c1,c3) + suiteDesClients(c1)
+ - suiteDesClients(c3) >= -4
+ RespectPasDeBoucle(c1,c4): - 5 trajet(c1,c4) + suiteDesClients(c1)
+ - suiteDesClients(c4) >= -4
+ RespectPasDeBoucle(c1,c5): - 5 trajet(c1,c5) + suiteDesClients(c1)
+ - suiteDesClients(c5) >= -4
+ RespectPasDeBoucle(c2,c1): - 5 trajet(c2,c1) - suiteDesClients(c1)
+ + suiteDesClients(c2) >= -4
+ RespectPasDeBoucle(c2,c2): - 5 trajet(c2,c2) >= -4
+ RespectPasDeBoucle(c2,c3): - 5 trajet(c2,c3) + suiteDesClients(c2)
+ - suiteDesClients(c3) >= -4
+ RespectPasDeBoucle(c2,c4): - 5 trajet(c2,c4) + suiteDesClients(c2)
+ - suiteDesClients(c4) >= -4
+ RespectPasDeBoucle(c2,c5): - 5 trajet(c2,c5) + suiteDesClients(c2)
+ - suiteDesClients(c5) >= -4
+ RespectPasDeBoucle(c3,c1): - 5 trajet(c3,c1) - suiteDesClients(c1)
+ + suiteDesClients(c3) >= -4
+ RespectPasDeBoucle(c3,c2): - 5 trajet(c3,c2) - suiteDesClients(c2)
+ + suiteDesClients(c3) >= -4
+ RespectPasDeBoucle(c3,c3): - 5 trajet(c3,c3) >= -4
+ RespectPasDeBoucle(c3,c4): - 5 trajet(c3,c4) + suiteDesClients(c3)
+ - suiteDesClients(c4) >= -4
+ RespectPasDeBoucle(c3,c5): - 5 trajet(c3,c5) + suiteDesClients(c3)
+ - suiteDesClients(c5) >= -4
+ RespectPasDeBoucle(c4,c1): - 5 trajet(c4,c1) - suiteDesClients(c1)
+ + suiteDesClients(c4) >= -4
+ RespectPasDeBoucle(c4,c2): - 5 trajet(c4,c2) - suiteDesClients(c2)
+ + suiteDesClients(c4) >= -4
+ RespectPasDeBoucle(c4,c3): - 5 trajet(c4,c3) - suiteDesClients(c3)
+ + suiteDesClients(c4) >= -4
+ RespectPasDeBoucle(c4,c4): - 5 trajet(c4,c4) >= -4
+ RespectPasDeBoucle(c4,c5): - 5 trajet(c4,c5) + suiteDesClients(c4)
+ - suiteDesClients(c5) >= -4
+ RespectPasDeBoucle(c5,c1): - 5 trajet(c5,c1) - suiteDesClients(c1)
+ + suiteDesClients(c5) >= -4
+ RespectPasDeBoucle(c5,c2): - 5 trajet(c5,c2) - suiteDesClients(c2)
+ + suiteDesClients(c5) >= -4
+ RespectPasDeBoucle(c5,c3): - 5 trajet(c5,c3) - suiteDesClients(c3)
+ + suiteDesClients(c5) >= -4
+ RespectPasDeBoucle(c5,c4): - 5 trajet(c5,c4) - suiteDesClients(c4)
+ + suiteDesClients(c5) >= -4
+ RespectPasDeBoucle(c5,c5): - 5 trajet(c5,c5) >= -4
+ RespectPasdeboucle3(c1): + suiteDesClients(c1) >= 1
+ RespectPasdeboucle3(c2): + suiteDesClients(c2) >= 1
+ RespectPasdeboucle3(c3): + suiteDesClients(c3) >= 1
+ RespectPasdeboucle3(c4): + suiteDesClients(c4) >= 1
+ RespectPasdeboucle3(c5): + suiteDesClients(c5) >= 1
+ RespectPasdeboucle2(c1): + suiteDesClients(c1) <= 5
+ RespectPasdeboucle2(c2): + suiteDesClients(c2) <= 5
+ RespectPasdeboucle2(c3): + suiteDesClients(c3) <= 5
+ RespectPasdeboucle2(c4): + suiteDesClients(c4) <= 5
+ RespectPasdeboucle2(c5): + suiteDesClients(c5) <= 5
+
+Bounds
+ 0 <= trajet(alpha,alpha) <= 1
+ 0 <= trajet(alpha,c1) <= 1
+ 0 <= trajet(alpha,c2) <= 1
+ 0 <= trajet(alpha,c3) <= 1
+ 0 <= trajet(alpha,c4) <= 1
+ 0 <= trajet(alpha,c5) <= 1
+ 0 <= trajet(c1,alpha) <= 1
+ 0 <= trajet(c1,c1) <= 1
+ 0 <= trajet(c1,c2) <= 1
+ 0 <= trajet(c1,c3) <= 1
+ 0 <= trajet(c1,c4) <= 1
+ 0 <= trajet(c1,c5) <= 1
+ 0 <= trajet(c2,alpha) <= 1
+ 0 <= trajet(c2,c1) <= 1
+ 0 <= trajet(c2,c2) <= 1
+ 0 <= trajet(c2,c3) <= 1
+ 0 <= trajet(c2,c4) <= 1
+ 0 <= trajet(c2,c5) <= 1
+ 0 <= trajet(c3,alpha) <= 1
+ 0 <= trajet(c3,c1) <= 1
+ 0 <= trajet(c3,c2) <= 1
+ 0 <= trajet(c3,c3) <= 1
+ 0 <= trajet(c3,c4) <= 1
+ 0 <= trajet(c3,c5) <= 1
+ 0 <= trajet(c4,alpha) <= 1
+ 0 <= trajet(c4,c1) <= 1
+ 0 <= trajet(c4,c2) <= 1
+ 0 <= trajet(c4,c3) <= 1
+ 0 <= trajet(c4,c4) <= 1
+ 0 <= trajet(c4,c5) <= 1
+ 0 <= trajet(c5,alpha) <= 1
+ 0 <= trajet(c5,c1) <= 1
+ 0 <= trajet(c5,c2) <= 1
+ 0 <= trajet(c5,c3) <= 1
+ 0 <= trajet(c5,c4) <= 1
+ 0 <= trajet(c5,c5) <= 1
+ suiteDesClients(c1) free
+ suiteDesClients(c2) free
+ suiteDesClients(c3) free
+ suiteDesClients(c4) free
+ suiteDesClients(c5) free
+
+Generals
+ trajet(alpha,alpha)
+ trajet(alpha,c1)
+ trajet(alpha,c2)
+ trajet(alpha,c3)
+ trajet(alpha,c4)
+ trajet(alpha,c5)
+ trajet(c1,alpha)
+ trajet(c1,c1)
+ trajet(c1,c2)
+ trajet(c1,c3)
+ trajet(c1,c4)
+ trajet(c1,c5)
+ trajet(c2,alpha)
+ trajet(c2,c1)
+ trajet(c2,c2)
+ trajet(c2,c3)
+ trajet(c2,c4)
+ trajet(c2,c5)
+ trajet(c3,alpha)
+ trajet(c3,c1)
+ trajet(c3,c2)
+ trajet(c3,c3)
+ trajet(c3,c4)
+ trajet(c3,c5)
+ trajet(c4,alpha)
+ trajet(c4,c1)
+ trajet(c4,c2)
+ trajet(c4,c3)
+ trajet(c4,c4)
+ trajet(c4,c5)
+ trajet(c5,alpha)
+ trajet(c5,c1)
+ trajet(c5,c2)
+ trajet(c5,c3)
+ trajet(c5,c4)
+ trajet(c5,c5)
+ suiteDesClients(c1)
+ suiteDesClients(c2)
+ suiteDesClients(c3)
+ suiteDesClients(c4)
+ suiteDesClients(c5)
+
+End

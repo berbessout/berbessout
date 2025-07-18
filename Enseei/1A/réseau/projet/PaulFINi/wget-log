@@ -1,0 +1,10 @@
+--2023-05-15 13:14:04--  http://120.7.250.195/
+Connexion à 120.7.250.195:80… échec : Connexion terminée par expiration du délai d'attente.
+Nouvel essai.
+
+--2023-05-15 13:16:14--  (essai :  2)  http://120.7.250.195/
+Connexion à 120.7.250.195:80… échec : Connexion terminée par expiration du délai d'attente.
+Nouvel essai.
+
+--2023-05-15 13:18:26--  (essai :  3)  http://120.7.250.195/
+Connexion à 120.7.250.195:80… échec : Le réseau n'est pas accessible.

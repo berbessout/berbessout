@@ -1,0 +1,45 @@
+#!/bin/bash
+ip link set dev eth1 up 
+ip addr add 192.168.85.2/26 dev eth1
+ip link set dev eth0 up 
+ip addr add 120.7.250.33/27 dev eth0
+ip route add default via 120.7.250.34
+service isc-dhcp-server start 
+
+#mises en place du snat
+iptables -t nat -A POSTROUTING -s 192.168.85.0/26 -o eth0 -j SNAT --to-source 120.7.250.33
+
+#On drop tout
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+
+#ON autorise les pings (icmp)
+iptables -t filter -A OUTPUT -p icmp -j ACCEPT
+iptables -t filter -A INPUT -p icmp -j ACCEPT
+iptables -t filter -A FORWARD -p icmp -j ACCEPT
+
+#Autorisation DHCP
+iptables -A INPUT -i eth0 -p udp --dport 67:68 --sport 67:68 -j ACCEPT
+
+#Autorisation DNS
+iptables -t filter -A FORWARD -d 120.7.250.194/26 -p udp --dport 53 -j ACCEPT
+iptables -t filter -A FORWARD -s 120.7.250.194/26 -p udp --sport 53 -j ACCEPT
+
+#Autorisation HTTPS
+iptables -A FORWARD -d 120.7.250.195/26 -p tcp --dport 80 -j ACCEPT
+iptables -A FORWARD -s 120.7.250.195/26 -p tcp --sport 80 -j ACCEPT
+
+#Autorisation HTTPS
+iptables -A FORWARD -d 120.7.250.1/26 -p tcp --dport 80 -j ACCEPT
+iptables -A FORWARD -s 120.7.250.1/26 -p tcp --sport 80 -j ACCEPT
+
+#Affichage de la table iptables
+#iptables -L
+
+
+
+
+
+
+

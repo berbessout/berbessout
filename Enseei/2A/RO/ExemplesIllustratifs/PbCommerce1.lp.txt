@@ -1,0 +1,20 @@
+\* Problem: PbCommerce1 *\
+
+Minimize
+ Couts: + c(f1,c1,m1) + 2 c(f1,c1,m2) + 3 c(f1,c1,m3) + c(f1,c2,m1)
+ + 2 c(f1,c2,m2) + 3 c(f1,c2,m3) + c(f2,c1,m1) + 3 c(f2,c1,m2)
+ + 2 c(f2,c1,m3) + c(f2,c2,m1) + 3 c(f2,c2,m2) + 2 c(f2,c2,m3)
+
+Subject To
+ Respectcolonnes(f1,c1): + c(f1,c1,m1) + c(f1,c1,m2) + c(f1,c1,m3) = 2
+ Respectcolonnes(f1,c2): + c(f1,c2,m1) + c(f1,c2,m2) + c(f1,c2,m3) = 1
+ Respectcolonnes(f2,c1): + c(f2,c1,m1) + c(f2,c1,m2) + c(f2,c1,m3) = -0
+ Respectcolonnes(f2,c2): + c(f2,c2,m1) + c(f2,c2,m2) + c(f2,c2,m3) = 3
+ RespectStocks(f1,m1): + c(f1,c1,m1) + c(f1,c2,m1) <= 2.5
+ RespectStocks(f1,m2): + c(f1,c1,m2) + c(f1,c2,m2) <= 1
+ RespectStocks(f1,m3): + c(f1,c1,m3) + c(f1,c2,m3) <= 2
+ RespectStocks(f2,m1): + c(f2,c1,m1) + c(f2,c2,m1) <= 1
+ RespectStocks(f2,m2): + c(f2,c1,m2) + c(f2,c2,m2) <= 2
+ RespectStocks(f2,m3): + c(f2,c1,m3) + c(f2,c2,m3) <= 1
+
+End

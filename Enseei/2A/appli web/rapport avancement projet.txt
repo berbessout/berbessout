@@ -1,0 +1,57 @@
+Projet Appli Web
+
+
+Séance 1:
+	
+	• Thème du site : Gestion de projet et forum de discussion autour de ces projets
+
+	• Spécifications du site :
+		- Entity Beans : 1- Utilisateur  (professeur ou élève)
+				  2- Projet
+				  3- Tache
+				  4- Forum
+				  5- Sujet
+				  6- Message
+				  7- Notification
+
+		- Diagramme des Entity Beans : 
+		- Description des pages :  1- page de connexion.
+					   2- page d’index contenant les liens de la page de modification des informations du compte (3), 
+					      la page d’accès aux projets (4) et la page d’accès aux forums (5).
+					   3- Cette page permettra de voir les information de votre compte ainsi que d’en modifier les informations
+					      comme le password par exemple.
+					   4- Cette page permettra de voir les différents projets auxquels le compte est lié et d’y accéder (6).
+					   5- Cette page permettra de voir les différents forums liés au comptes et d’y accéder(7).
+					   6- Cette page permettra de voir les différentes tâches du projet et les informations de ces tâches.
+					   7- Cetta page permettra de voir la discussion et d’écrire  un message. Tous les comptes liés à cette
+					      discussion recevront une notification.
+
+Séance 2:
+
+	• Nous avons fais la première page du site (la page de connexion). Nous sommes capable de vérifier si le couple identifiant/password 
+	  est connu du système.
+	
+	• Nous avons coder les différentes entités qui constitueront le site ainsi que la façade et la servlet.
+		- ForumLibre
+		- Message
+		- Sujet
+		- Utilisateur
+		- Forum
+		- ForumProjet
+		- Notification
+		- Projet
+		- Statut
+		- Tache
+
+Séance 3:
+
+	• Nous avons ajouté une page d'inscription et ajouté des messages d'erreur lors de la connexion.
+		- L'utilisateur peut modifier son mot de passe.
+		- L'utilisateur peut maintenant	rentrer les informations suivantes :
+			1- Le nom d'utilisateur
+			2- Le mot de passe
+			3- son rôle : professeur ou élève (Nouveau)
+
+	• Nous avons ajouté de nouvelles fonctionnalités à la façade.
+
+	• Nous avons ajouté la possibilité de voir les projets dont l'utilisateur fait partie (En cours) et de créer de nouveaux projets.

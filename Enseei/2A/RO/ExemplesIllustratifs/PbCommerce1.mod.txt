@@ -1,0 +1,43 @@
+#  GLPK model file created by SUN for RO teaching
+
+
+###############################  Model ###############################
+
+
+
+###############################  Sets  ###############################
+
+set CLIENTS;
+set MAGASINS;
+set FLUIDE;
+
+################### Variables ###################
+
+var c{i in FLUIDE, j in CLIENTS, k in MAGASINS}, >= 0;
+
+## To declare integer variables : 
+# var Q{i in CIMENTS}, integer; 
+
+## To declare binary variables : 
+# var Q{i in CIMENTS}, binary; 
+
+
+###################  Constants: Data to load   #########################
+
+param commande{i in CLIENTS, j in FLUIDE};
+param stocks{i in MAGASINS, j in FLUIDE};
+param couts{i in MAGASINS, j in FLUIDE};
+
+################### Constraints ###################
+
+s.t. Respectcolonnes{i in FLUIDE, j in CLIENTS}:
+  sum{k in MAGASINS} c[i,j, k] = commande[j,i];
+s.t. RespectStocks{i in FLUIDE, k in MAGASINS} :
+  sum{j in CLIENTS} c[i,j,k] <= stocks[k,i]; 
+
+###### Objective ######
+
+minimize Couts: 
+		sum{i in FLUIDE, j in CLIENTS, k in MAGASINS} c[i,j,k]*couts[k,i]; 
+
+end;

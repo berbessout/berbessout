@@ -1,0 +1,79 @@
+network:
+  name: ProjetReseauTb
+  version: 0.1
+  hosts:
+    - WEB
+      mode : docker
+      image : apache_n7:latest
+      files : ./files/WEB/var:/
+ 
+    - UE2
+      mode : netns
+      init : ./scripts/UE2
+ 
+ 
+    - BOX2
+      mode : docker
+      image : dhcp_n7:latest
+      files : ./files/BOX2/etc:/
+ 
+    - BOX1
+      mode : docker
+      image : dhcp_n7:latest
+      files : ./files/BOX1/etc:/
+ 
+    - UE1
+      mode : netns
+      init : ./scripts/UE1
+ 
+ 
+    - FAIA
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/FAIA/etc:/
+ 
+ 
+    - R1
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/R1/etc:/
+ 
+    - R2
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/R2/etc:/
+ 
+ 
+    - FAIS
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/FAIS/etc:/
+ 
+    - DNS
+      mode : docker
+      image : dns_n7:latest
+      files : ./files/DNS/etc:/
+ 
+    - SWEB
+      mode : docker
+      image : apache_n7:latest
+      files : ./files/SWEB/var:/
+ 
+ 
+  links :
+    - UE1:eth0!BOX1:eth0
+ 
+  bridges:
+    - Switch0
+      interfaces: BOX2:eth0!WEB:eth0!UE2:eth0!
+    - Switch1
+      interfaces: FAIA:eth1!BOX2:eth1!BOX1:eth1!
+    - Switch2
+      interfaces: R1:eth0!R2:eth0!FAIA:eth0!
+    - Switch3
+      interfaces: FAIS:eth1!R1:eth1!R2:eth1!
+    - Switch4
+      interfaces: FAIS:eth0!SWEB:eth0!DNS:eth0!
+ 
+  consoles :
+    - all

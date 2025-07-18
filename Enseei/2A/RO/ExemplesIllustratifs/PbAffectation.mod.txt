@@ -1,0 +1,39 @@
+#  GLPK model file created by SUN for RO teaching
+
+
+###############################  Model ###############################
+
+
+
+###############################  Sets  ###############################
+
+set TAILLE;
+
+################### Variables ###################
+
+var choix{i in TAILLE, j in TAILLE}, binary;
+
+## To declare integer variables : 
+# var Q{i in CIMENTS}, integer; 
+
+## To declare binary variables : 
+# var Q{i in CIMENTS}, binary; 
+
+
+###################  Constants: Data to load   #########################
+
+param preferences{i in TAILLE, j in TAILLE};
+
+################### Constraints ###################
+
+s.t. Respectcolonnes{j in TAILLE}:
+  sum{i in TAILLE} choix[i,j] = 1;
+s.t. Respectligne{j in TAILLE}:
+  sum{i in TAILLE} choix[j,i] = 1;
+
+###### Objective ######
+
+maximize PreferencesTotales: 
+		sum{i in TAILLE, j in TAILLE} choix[i,j]*preferences[j,i]; 
+
+end;

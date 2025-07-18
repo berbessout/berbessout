@@ -1,0 +1,9 @@
+#!/bin/bash
+ip link set dev eth0 up
+#ip addr add 192.168.85.1/26 dev eth0
+dhclient eth0
+#ip route add default via 192.168.85.2
+
+echo "nameserver 120.7.250.194" >> /etc/resolv.conf
+
+

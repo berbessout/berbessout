@@ -1,0 +1,78 @@
+network:
+  name: ArchitectureTP
+  version: 0.1
+  hosts:
+    - CLient1
+      mode : netns
+      init : ./scripts/CLient1
+ 
+ 
+    - ServeurWebUtil
+      mode : docker
+      image : apache_n7:latest
+      files : ./files/ServeurWebUtil/var:/
+ 
+    - BOX
+      mode : docker
+      image : dhcp_n7:latest
+      files : ./files/BOX/etc:/
+ 
+    - RouteurFAIAcces
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/RouteurFAIAcces/etc:/
+ 
+    - BOX2
+      mode : docker
+      image : dhcp_n7:latest
+      files : ./files/BOX2/etc:/
+ 
+    - CLient2
+      mode : netns
+      init : ./scripts/CLient2
+ 
+ 
+    - R2
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/R2/etc:/
+ 
+    - R1
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/R1/etc:/
+ 
+ 
+    - RouteurFAIserveur
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/RouteurFAIserveur/etc:/
+ 
+ 
+    - ServeurDNS
+      mode : docker
+      image : dns_n7:latest
+      files : ./files/ServeurDNS/etc:/
+ 
+    - ServeurWeb
+      mode : docker
+      image : apache_n7:latest
+      files : ./files/ServeurWeb/var:/
+ 
+  links :
+    - BOX:eth1!RouteurFAIAcces:eth0
+    - BOX2:eth0!RouteurFAIAcces:eth1
+    - CLient2:eth0!BOX2:eth1
+ 
+  bridges:
+    - Switch0
+      interfaces: ServeurWebUtil:eth0!CLient1:eth0!BOX:eth0!
+    - Switch1
+      interfaces: R1:eth0!R2:eth0!RouteurFAIAcces:eth2!
+    - Switch2
+      interfaces: RouteurFAIserveur:eth1!R1:eth1!R2:eth1!
+    - Switch3
+      interfaces: RouteurFAIserveur:eth0!ServeurDNS:eth0!ServeurWeb:eth0!
+ 
+  consoles :
+    - all

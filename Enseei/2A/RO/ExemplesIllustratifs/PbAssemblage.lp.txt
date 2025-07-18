@@ -1,0 +1,16 @@
+\* Problem: assemblage de vélos *\
+
+Maximize
+Benefice: 700 C + 300 S 
+
+Subject To
+temporaire : 6 C + 5 S <= 6000
+CapacitedeParking : 2.5 C + S <= 1500
+CapcitVatteries : C <= 700
+
+\* To declare integer variables :   
+Integer 
+C
+S  
+
+End

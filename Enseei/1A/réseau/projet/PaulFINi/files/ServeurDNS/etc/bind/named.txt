@@ -1,0 +1,12 @@
+zone "monsupersite.com" {
+        type master;
+        file "/etc/bind/zones/monsupersite.db";
+	forwarders{};
+};
+zone "site.com" {
+        type master;
+        file "/etc/bind/zones/site.db";
+	forwarders{};
+};
+
+

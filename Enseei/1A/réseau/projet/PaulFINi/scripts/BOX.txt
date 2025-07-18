@@ -1,0 +1,65 @@
+#!/bin/bash
+ip link set dev eth0 up
+ip link set dev eth1 up 
+
+ip addr add 192.168.85.2/26 dev eth0
+ip addr add 120.7.250.1/27 dev eth1
+
+
+ip route add default via 120.7.250.2
+
+#Mises en place du DHCP pour l'attribution des adresses
+service isc-dhcp-server start 
+
+
+#On drop tout, on verra ensuite ce que l'on doit accepter
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+
+#Mises en place du SNAT
+iptables -t nat -A POSTROUTING -s 192.168.85.0/26 -o eth1 -j SNAT --to-source 120.7.250.1
+#Tout ce qui vient du réseau 192.168.85.0/26 depuis, on le change et on dit que la source est 120.7.250.1
+
+#Mises en place du DNAT 
+iptables -t nat -A PREROUTING -p tcp -d 120.7.250.1 -j DNAT --to 192.168.85.3
+#Tout ce qui va a 120.7.250.1 depuis le port 80 on l'accepte et one le redirige vers 192.168.85.3
+
+#ON autorise les pings (icmp)
+iptables -t filter -A OUTPUT -p icmp -j ACCEPT
+iptables -t filter -A INPUT -p icmp -j ACCEPT
+iptables -t filter -A FORWARD -p icmp -j ACCEPT
+
+#Autorisation DHCP
+iptables -A INPUT -i eth1 -p udp --dport 67:68 --sport 67:68 -j ACCEPT 
+
+#Autorisation DNS
+iptables -t filter -A FORWARD -d 120.7.250.194/26 -p udp --dport 53 -j ACCEPT
+iptables -t filter -A FORWARD -s 120.7.250.194/26 -p udp --sport 53 -j ACCEPT
+
+#Autorisation HTTPS vers DMZ
+iptables -A FORWARD -d 120.7.250.195/26 -p tcp --dport 80 -j ACCEPT
+iptables -A FORWARD -s 120.7.250.195/26 -p tcp --sport 80 -j ACCEPT
+
+#Autorisation HTTPS vers serveur client 
+iptables -A INPUT -d 192.168.85.3 -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -s 192.168.85.3 -p tcp --sport 80 -j ACCEPT
+iptables -A FORWARD -d 192.168.85.3 -p tcp --dport 80 -j ACCEPT
+iptables -A FORWARD -s 192.168.85.3 -p tcp --sport 80 -j ACCEPT
+iptables -A OUTPUT -d 192.168.85.3 -p tcp --dport 80 -j ACCEPT
+iptables -A OUTPUT -s 192.168.85.3 -p tcp --sport 80 -j ACCEPT
+
+#AUtorise https depuis serveur client
+iptables -A INPUT -d 120.7.250.33 -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -s 120.7.250.33 -p tcp --sport 80 -j ACCEPT
+iptables -A FORWARD -d 120.7.250.33 -p tcp --dport 80 -j ACCEPT
+iptables -A FORWARD -s 120.7.250.33 -p tcp --sport 80 -j ACCEPT
+
+
+
+#Ajout de telnet
+#iptables -A INPUT -s 120.7.250.33 -p tcp --dport 23 -j ACCEPT
+#iptables -A OUTPUT -d 120.7.250.33 -p tcp --dport 23 -j ACCEPT
+
+#Affichage de la table iptables
+#iptables -L
